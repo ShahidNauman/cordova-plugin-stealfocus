@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android" id="cordova-plugin-stealfocus" version="0.0.1">
+    <name>Steal Focus</name>
+    <description>A Cordova plugin that enables a Cordova app to steal focus when it has been sent to background.</description>
+    <author>Shahid Nuaman</author>
+    <keywords>cordova,android,stealfocus,background,foreground</keywords>
+    <license>MIT</license>
+
+    <js-module src="www/stealfocus.js" name="StealFocus">
+        <clobbers target="StealFocus" />
+    </js-module>
+    <platform name="android">
+        <config-file target="res/xml/config.xml" parent="/*">
+            <feature name="StealFocus">
+                <param name="android-package" value="cordova.plugins.stealfocus.StealFocus" />
+            </feature>
+        </config-file>
+
+        <service android:name="cordova.plugins.stealfocus.PushService" android:enabled="true" android:exported="true">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
+        <source-file src="src/android/PushService.java" target-dir="src/cordova/plugins/stealfocus" />
+        <source-file src="src/android/ScreenHelper.java" target-dir="src/cordova/plugins/stealfocus" />
+        <source-file src="src/android/StealFocus.java" target-dir="src/cordova/plugins/stealfocus" />
+    </platform>
+</plugin>

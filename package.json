@@ -1,0 +1,30 @@
+{
+  "name": "cordova-plugin-stealfocus",
+  "version": "0.0.1",
+  "description": "A Cordova plugin that enables a Cordova app to steal focus when it has been sent to background.",
+  "cordova": {
+    "id": "cordova-plugin-stealfocus",
+    "platforms": [
+      "android"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ShahidNaumanTEO/cordova-plugin-stealfocus.git"
+  },
+  "keywords": [
+    "cordova",
+    "android",
+    "stealfocus",
+    "background",
+    "foreground",
+    "ecosystem:cordova",
+    "cordova-android"
+  ],
+  "author": "Shahid Nauman <shahid.nauman@teo-intl.com> (https://github.com/ShahidNaumanTEO)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ShahidNaumanTEO/cordova-plugin-stealfocus/issues"
+  },
+  "homepage": "https://github.com/ShahidNaumanTEO/cordova-plugin-stealfocus#readme"
+}
