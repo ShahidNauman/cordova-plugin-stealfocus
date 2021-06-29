@@ -17,6 +17,11 @@
             </feature>
         </config-file>
 
+        <config-file parent="/*" target="AndroidManifest.xml">
+            <uses-permission android:name="android.permission.WAKE_LOCK" />
+            <uses-permission android:name="android.permission.USE_FULL_SCREEN_INTENT" />
+        </config-file>
+
         <config-file parent="application" target="AndroidManifest.xml">
             <service android:name="cordova.plugins.stealfocus.PushService" android:enabled="true" android:exported="true">
                 <intent-filter>
