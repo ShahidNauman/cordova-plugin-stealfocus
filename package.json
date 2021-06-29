@@ -1,7 +1,7 @@
 {
   "name": "cordova-plugin-stealfocus",
   "version": "0.0.1",
-  "description": "A Cordova plugin that enables a Cordova app to steal focus when it has been sent to background.",
+  "description": "A Cordova plugin that enables a Cordova app to steal focus when it has been sent to the background.",
   "cordova": {
     "id": "cordova-plugin-stealfocus",
     "platforms": [

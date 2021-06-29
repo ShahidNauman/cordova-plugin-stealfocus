@@ -9,21 +9,32 @@
     <js-module src="www/stealfocus.js" name="StealFocus">
         <clobbers target="StealFocus" />
     </js-module>
+
     <platform name="android">
-        <config-file target="res/xml/config.xml" parent="/*">
+        <config-file parent="/*" target="res/xml/config.xml">
             <feature name="StealFocus">
                 <param name="android-package" value="cordova.plugins.stealfocus.StealFocus" />
             </feature>
         </config-file>
 
-        <service android:name="cordova.plugins.stealfocus.PushService" android:enabled="true" android:exported="true">
-            <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT" />
-            </intent-filter>
-        </service>
+        <config-file parent="application" target="AndroidManifest.xml">
+            <service android:name="cordova.plugins.stealfocus.PushService" android:enabled="true" android:exported="true">
+                <intent-filter>
+                    <action android:name="com.google.firebase.MESSAGING_EVENT" />
+                </intent-filter>
+            </service>
+            <service android:name="cordova.plugins.stealfocus.MyConnectionService" android:permission="android.permission.BIND_TELECOM_CONNECTION_SERVICE">
+                <intent-filter>
+                    <action android:name="android.telecom.ConnectionService" />
+                </intent-filter>
+            </service>
+        </config-file>
 
+        <source-file src="src/android/Constants.java" target-dir="src/cordova/plugins/stealfocus" />
+        <source-file src="src/android/MyConnectionService.java" target-dir="src/cordova/plugins/stealfocus" />
         <source-file src="src/android/PushService.java" target-dir="src/cordova/plugins/stealfocus" />
         <source-file src="src/android/ScreenHelper.java" target-dir="src/cordova/plugins/stealfocus" />
         <source-file src="src/android/StealFocus.java" target-dir="src/cordova/plugins/stealfocus" />
+        <source-file src="src/android/StealFocusCall.java" target-dir="src/cordova/plugins/stealfocus" />
     </platform>
 </plugin>

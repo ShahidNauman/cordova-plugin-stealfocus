@@ -1,15 +1,17 @@
 package cordova.plugins.stealfocus;
 
+import android.app.Activity;
+
 import org.apache.cordova.CallbackContext;
 import org.apache.cordova.CordovaInterface;
 import org.apache.cordova.CordovaPlugin;
 import org.apache.cordova.CordovaWebView;
 import org.json.JSONArray;
 
-import static cordova.plugins.stealfocus.PushService.*;
-import static cordova.plugins.stealfocus.ScreenHelper.*;
-
 public class StealFocus extends CordovaPlugin {
+    ScreenHelper screenHelper;
+    Activity cordovaActivity;
+
     /**
      * Called after plugin construction and fields have been initialized.
      * Prefer to use pluginInitialize instead since there is no value in
@@ -21,6 +23,9 @@ public class StealFocus extends CordovaPlugin {
     @Override
     public void initialize(CordovaInterface cordova, CordovaWebView webView) {
         super.initialize(cordova, webView);
+
+        cordovaActivity = cordova.getActivity();
+        screenHelper = new ScreenHelper(cordovaActivity);
     }
 
     /**
@@ -39,43 +44,46 @@ public class StealFocus extends CordovaPlugin {
      */
     @Override
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) {
-        if ("enable".equals(action)) {
-            enable(callbackContext);
+        // if ("enable".equals(action)) {
+        //    enable(callbackContext);
+        //    return true;
+        // } else if ("disable".equals(action)) {
+        //    disable(callbackContext);
+        //    return true;
+        // } else if ("onPushReceived".equals(action)) {
+        //    PushService.onPushReceived(callbackContext);
+        //    return true;
+        // } else if ("isAppInForeground".equals(action)) {
+        //    ScreenHelper.isAppInForeground(callbackContext);
+        //    return true;
+        // } else if ("isScreenLocked".equals(action)) {
+        //    ScreenHelper.isScreenLocked(callbackContext);
+        //    return true;
+        // } else if ("bringAppToForeground".equals(action)) {
+        //    ScreenHelper.bringAppToForeground(cordovaActivity.getApplicationContext(), callbackContext);
+        //    return true;
+        // } else
+        if ("forceAwake".equals(action)) {
+            screenHelper.forceAwake(callbackContext);
             return true;
-        } else if ("disable".equals(action)) {
-            disable(callbackContext);
-            return true;
-        } else if ("onPushReceived".equals(action)) {
-            onPushReceived(callbackContext);
-            return true;
-        } else if ("isAppInForeground".equals(action)) {
-            isAppInForeground(callbackContext);
-            return true;
-        } else if ("isScreenLocked".equals(action)) {
-            isScreenLocked(callbackContext);
-            return true;
-        } else if ("bringAppToForeground".equals(action)) {
-            bringAppToForeground(callbackContext);
-            return true;
-        } else if ("unlockScreen".equals(action)) {
-            unlockScreen(callbackContext);
-            return true;
-        } else if ("lockScreen".equals(action)) {
-            lockScreen(callbackContext);
-            return true;
-        } else if ("onScreenLocked".equals(action)) {
-            onScreenLocked(callbackContext);
+        } else if ("undoForceAwake".equals(action)) {
+            screenHelper.undoForceAwake(callbackContext);
             return true;
         }
+        // else if ("onScreenLocked".equals(action)) {
+        //    ScreenHelper.onScreenLocked(callbackContext);
+        //    callbackContext.error("");
+        //    return true;
+        // }
 
         return false;  // Returning false results in a "MethodNotFound" error.
     }
 
-    private void disable(CallbackContext callbackContext) {
-        if (callbackContext != null) callbackContext.success();
-    }
+    // private void enable(CallbackContext callbackContext) {
+    //    if (callbackContext != null) callbackContext.success();
+    // }
 
-    private void enable(CallbackContext callbackContext) {
-        if (callbackContext != null) callbackContext.success();
-    }
+    // private void disable(CallbackContext callbackContext) {
+    //    if (callbackContext != null) callbackContext.success();
+    // }
 }
